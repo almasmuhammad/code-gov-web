@@ -1,4 +1,9 @@
-@import '../../../styles/base/all';
+@import '~bourbon/app/assets/stylesheets/addons/font-stacks';
+@import '~bourbon/app/assets/stylesheets/addons/clearfix';
+@import '../../../styles/base/variables';
+@import '~bourbon-neat/core/neat/settings/settings';
+@import '~bourbon-neat/core/neat/mixins/grid-column';
+@import '~uswds/src/stylesheets/core/variables';
 
 .browse {
   @include grid-column(12);

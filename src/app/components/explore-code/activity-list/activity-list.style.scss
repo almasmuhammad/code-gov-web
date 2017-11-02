@@ -1,4 +1,8 @@
-@import '../../../../styles/base/all';
+@import '../../../../styles/base/variables';
+@import '~bourbon/app/assets/stylesheets/addons/clearfix';
+@import '~bourbon-neat/core/neat/settings/settings';
+@import '~bourbon-neat/core/neat/mixins/grid-column';
+@import '~uswds/src/stylesheets/core/variables';
 
 .activity {
   margin-bottom: 1em;

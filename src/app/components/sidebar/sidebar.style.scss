@@ -1,4 +1,7 @@
-@import '../../../styles/base/all';
+@import '~bourbon/app/assets/stylesheets/addons/font-stacks';
+@import '~bourbon-neat/core/neat/settings/settings';
+@import '~bourbon-neat/core/neat/mixins/grid-column';
+@import '~uswds/src/stylesheets/core/variables';
 
 .menu-icon {
   transform: rotate(0deg);

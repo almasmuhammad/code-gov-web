@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map } from 'lodash';
+import map from 'lodash/map';
 
 @Injectable()
 

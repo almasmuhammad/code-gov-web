@@ -1,4 +1,8 @@
-@import '../../../styles/base/all';
+@import '~bourbon/app/assets/stylesheets/addons/font-stacks';
+@import '../../../styles/base/grid-settings';
+@import '~bourbon-neat/core/neat/settings/settings';
+@import '~bourbon-neat/core/neat/mixins/grid-column';
+@import '~uswds/src/stylesheets/core/variables';
 
 .tool {
   padding: 2.5em 1.5em;

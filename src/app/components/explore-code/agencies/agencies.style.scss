@@ -1,4 +1,7 @@
-@import '../../../../styles/base/all';
+@import '../../../../styles/base/variables';
+@import '../../../../styles/base/grid-settings';
+@import '~bourbon-neat/core/neat/settings/settings';
+@import '~bourbon-neat/core/neat/mixins/grid-column';
 
 .agencies-content {
   background-color: $color-white;
