@@ -201,6 +201,7 @@ module.exports = function (options) {
       'polyfills': './src/polyfills.browser.ts',
       'vendor': './src/vendor.browser.ts',
       'main': './src/main.browser.ts',
+      'styles': './src/styles/base/_all.scss',
     },
 
     resolve: {
@@ -230,8 +231,13 @@ module.exports = function (options) {
         },
         {
           test: /\.scss$/,
-          exclude: /node_modules/,
-          loader: 'to-string-loader!style-loader!css-loader!postcss-loader!resolve-url-loader!sass-loader?sourceMap',
+          exclude: [ /node_modules/, /src\/styles/],
+          loader: 'raw-loader!postcss-loader!resolve-url-loader!sass-loader?sourceMap',
+        },
+        {
+          test: /\.scss$/,
+          include: /src\/styles/,
+          loader: 'style-loader!css-loader!postcss-loader!resolve-url-loader!sass-loader?sourceMap',
         },
         {
           test: /\.scss$/,

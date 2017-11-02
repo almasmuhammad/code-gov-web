@@ -1,8 +1,7 @@
 @import 'grid-settings';
 @import 'variables';
-@import '~bourbon/app/assets/stylesheets/addons/clearfix';
-@import '~bourbon-neat/core/neat/settings/settings';
-@import '~bourbon-neat/core/neat/mixins/grid-column';
+@import '~bourbon/app/assets/stylesheets/bourbon';
+@import '~bourbon-neat/core/neat';
 @import '~uswds/src/stylesheets/core/variables';
 
 .docs-content {
