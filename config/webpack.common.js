@@ -147,6 +147,7 @@ module.exports = function (options) {
       inject: 'head'
     }),
     new PreloadWebpackPlugin(),
+    new BundleAnalyzerPlugin(),
   ];
 
   /**
