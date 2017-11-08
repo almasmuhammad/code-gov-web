@@ -5,12 +5,11 @@
 .repo-list-item {
   display: block;
   margin-bottom: 1em;
+  padding: 0.5rem;
   text-decoration: none;
 
-  &:hover {
-    h3 {
-      color: $color-primary;
-    }
+  a {
+    color: $brand-teal;
   }
 }
 
@@ -23,11 +22,15 @@ p {
   margin: 0;
 }
 
+.repo-description {
+  margin-bottom: 1rem;
+}
+
 .repo-features {
   background-color: $color-cool-blue-lightest;
   color: $brand-blue-dark;
   font-size: 0.8em;
-  margin-top: 1rem;
+  margin-bottom: 1rem;
   padding: 0.7rem 1rem;
 
   li {
@@ -41,5 +44,14 @@ p {
         margin-right: 0.2em;
       }
     }
+  }
+}
+
+.repo-agency-icon {
+  font-size: 2rem;
+
+  img {
+    height: 3rem;
+    vertical-align: bottom;
   }
 }

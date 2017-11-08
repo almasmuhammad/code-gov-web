@@ -37,8 +37,11 @@ export class SearchResultsComponent {
     private activatedRoute: ActivatedRoute,
     private searchService: SearchService,
   ) {
-    this.stateService.set('section', 'explore-code');
+  }
 
+  ngOnInit() {
+    this.stateService.set('section', 'explore-code');
+    
     this.subscription = this.activatedRoute.queryParams.subscribe(
       (response: any) => {
         this.queryValue = response.q;

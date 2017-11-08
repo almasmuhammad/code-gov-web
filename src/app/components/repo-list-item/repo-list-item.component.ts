@@ -17,7 +17,7 @@ import { Agency, AgencyService } from '../../services/agency';
 
 export class RepoListItemComponent {
   @Input() repo;
-  private agency: Agency;
+  agency: Agency;
 
   /**
    * Constructs a RepoListItemComponent.
@@ -27,7 +27,7 @@ export class RepoListItemComponent {
   constructor(private agencyService: AgencyService) {}
 
   ngOnInit() {
-    this.agency = this.agencyService.getByName(this.repo.agency);
+    this.agency = this.agencyService.getAgency(this.repo.agency);
   }
 
   getAgencyIcon() {
