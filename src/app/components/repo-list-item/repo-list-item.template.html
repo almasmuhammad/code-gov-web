@@ -4,6 +4,10 @@
     {{ repo.description | truncate : 200 }}
   </p>
   <ul class="usa-unstyled-list repo-features">
+    <li *ngIf="repo.repositoryURL">
+      <i class="devicons devicons-github"></i>
+      <span>{{ repo.repositoryURL }}</span>
+    </li>
     <li *ngFor="let language of repo.languages" class="language">
       <i class="devicons devicons-{{language | lowercase | languageIcon }}"></i>
       <span>{{ language }}</span>
