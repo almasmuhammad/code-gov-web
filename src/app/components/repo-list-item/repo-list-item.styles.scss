@@ -2,7 +2,7 @@
 @import '../../../styles/base/variables';
 @import '~uswds/src/stylesheets/core/variables';
 
-a {
+.repo-list-item {
   display: block;
   margin-bottom: 1em;
   text-decoration: none;
@@ -24,11 +24,11 @@ p {
 }
 
 .repo-features {
-  margin-top: 0.2em;
-
-  i {
-    color: $brand-teal;
-  }
+  background-color: $color-cool-blue-lightest;
+  color: $brand-blue-dark;
+  font-size: 0.8em;
+  margin-top: 1rem;
+  padding: 0.7rem 1rem;
 
   li {
     display: inline-block;
