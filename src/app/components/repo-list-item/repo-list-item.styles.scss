@@ -35,7 +35,12 @@ p {
 
   li {
     display: inline-block;
-    margin-right: 0.75em;
+    margin-right: 1.5rem;
+
+    i {
+      font-size: 1.5em;
+      vertical-align: bottom;
+    }
 
     &:last-child {
       margin-right: 0;
@@ -51,7 +56,8 @@ p {
   font-size: 2rem;
 
   img {
-    height: 3rem;
-    vertical-align: bottom;
+    max-height: 3rem;
+    max-width: 3rem;
+    vertical-align: middle;
   }
 }

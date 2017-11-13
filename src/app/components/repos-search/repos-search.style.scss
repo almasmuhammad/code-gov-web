@@ -76,21 +76,21 @@ button {
   }
 }
 
-input,
-label {
-  max-width: none;
-}
-
-label {
-  height: 0px;
-  margin: 0;
-  overflow: none;
-  text-align: left;
-  text-indent: -9999px;
-}
-
 .search-form {
   @include clearfix;
+
+  input,
+  label {
+    max-width: none;
+  }
+
+  label {
+    height: 0px;
+    margin: 0;
+    overflow: none;
+    text-align: left;
+    text-indent: -9999px;
+  }
 }
 
 .search-input-container {

@@ -106,7 +106,6 @@
     "sass-loader": "^6.0.6",
     "typed.js": "^1.1.1",
     "typings": "^2.1.1",
-    "uswds": "^1.4.1",
     "webpack-create-file-plugin": "^0.1.0",
     "zone.js": "^0.8.12"
   },
@@ -173,7 +172,7 @@
     "typedoc": "^0.5.0",
     "typescript": "2.3.4",
     "url-loader": "^0.5.7",
-    "uswds": "^0.12.1",
+    "uswds": "^1.4.2",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-middleware": "^1.12.0",

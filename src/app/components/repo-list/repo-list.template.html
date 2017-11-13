@@ -5,9 +5,7 @@
 
 <div *ngIf="!isLoading">
   <div *ngIf="hasRepos()" class="repos-container">
-    <h4 class="repos-count">
-      We found {{ total }} {{ "Repositories" | pluralize : reposTotal }}
-    </h4>
+    <p class="repo-list-summary">Results <strong>1-10</strong> of <strong>{{ total }}</strong></p>
     <ul class="repos-list usa-unstyled-list"
       infinite-scroll
       [infiniteScrollDistance]="2"

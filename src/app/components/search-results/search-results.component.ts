@@ -22,7 +22,11 @@ import { StateService } from '../../services/state';
 export class SearchResultsComponent {
   public searchQuery: string = '';
   private queryValue: string = '';
-  private subscription: Subscription;
+  private routeSubscription: Subscription;
+  private results = [];
+  private searchResultsSubscription: Subscription;
+  private total: number;
+  private isLoading = true;
 
   /**
    * Constructs a SearchResultsComponent.
@@ -42,18 +46,27 @@ export class SearchResultsComponent {
   ngOnInit() {
     this.stateService.set('section', 'explore-code');
     
-    this.subscription = this.activatedRoute.queryParams.subscribe(
+    this.routeSubscription = this.activatedRoute.queryParams.subscribe(
       (response: any) => {
         this.queryValue = response.q;
         this.searchService.search(this.queryValue);
       }
     );
+
+    this.searchResultsSubscription = this.searchService.searchResultsReturned$.subscribe(results => {
+      if (results !== null) {
+        this.results = results;
+        this.total = this.searchService.total;
+        this.isLoading = false;
+      }
+    });
   }
 
   /**
    * On removal from the DOM, unsubscribe from URL updates.
    */
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.routeSubscription.unsubscribe();
+    this.searchResultsSubscription.unsubscribe();
   }
 }

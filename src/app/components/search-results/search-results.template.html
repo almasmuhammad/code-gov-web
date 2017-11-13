@@ -1,13 +1,120 @@
 <div class="search-results-content">
-  <div class="search-container">
+  <div class="search-results-banner">
+    <h1>Search Results</h1>
+  </div>
+  <div class="search-results-breadcrumb usa-grid">
+    <ul class="usa-unstyled-list">
+      <li><a routerLink="home">Home</a></li>
+      <li>Search Results</li>
+    </ul>
+  </div>
+  <!-- <div class="search-container">
     <div class="usa-grid">
       <div class="search-col">
         <repos-search [queryValue]="queryValue" buttonClasses="button--primary"></repos-search>
       </div>
     </div>
+  </div> -->
+  <div class="search-results-header usa-grid">
+    <h3 class="repos-count">
+      We found {{ total }} {{ "Repositories" | pluralize : reposTotal }} for "{{ queryValue }}"
+    </h3>
+    <form class="search-meta-section">
+      <p>
+        <label for="sort">Sort</label>
+        <select id="sort">
+          <option value="relevance">Relevance</option>
+          <option value="date">Date</option>
+        </select>
+      </p>
+      <p>
+        <label for="pageSize">Items Per Page</label>
+        <select id="pageSize">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+        </select>
+      </p>
+    </form>
   </div>
   <div class="usa-grid">
-    <div class="content-col">
+    <div class="search-filter-section">
+      <h4>Filter</h4>
+      <form class="search-filters">
+        <fieldset class="usa-fieldset-inputs">
+          <ul class="search-filter usa-unstyled-list">
+            <li>
+              <h5>Language</h5>
+              <ul class="usa-unstyled-list">
+                <li>
+                  <input id="language-java" name="language" type="checkbox" value="java" /><label for="language-java"><span>Java</span></label>
+                </li>
+                <li>
+                  <input id="language-javascript" name="language" type="checkbox" value="javascript" /><label for="language-javascript"><span>JavaScript</span></label>
+                </li>
+                <li>
+                  <input id="language-php" name="language" type="checkbox" value="php" /><label for="language-php"><span>PHP</span></label>
+                </li>
+                <li>
+                  <input id="language-python" name="language" type="checkbox" value="python" /><label for="language-python"><span>Python</span></label>
+                </li>
+                <li>
+                  <a class="show-more" href="#">Show more</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="search-filter usa-unstyled-list">
+            <li>
+              <h5>License</h5>
+              <ul class="usa-unstyled-list">
+                <li>
+                  <input id="license-AL2" name="license" type="checkbox" value="AL2" /><label for="license-AL2"><span>Apache License 2.0</span></label>
+                </li>
+                <li>
+                  <input id="license-BSD3" name="license" type="checkbox" value="BSD3" /><label for="license-BSD3"><span>BSD 3-Clause "New" or "Revised" License</span></label>
+                </li>
+                <li>
+                  <input id="license-BSD2" name="license" type="checkbox" value="BSD2" /><label for="license-BSD2"><span>BSD 2-Clause "Simplified" or "FreeBSD" License</span></label>
+                </li>
+                <li>
+                  <input id="license-CDDL" name="license" type="checkbox" value="CDDL" /><label for="license-CDDL"><span>Common Development and Distribution License</span></label>
+                </li>
+                <li>
+                  <input id="license-EPL" name="license" type="checkbox" value="EPL" /><label for="license-EPL"><span>Eclipse Public License</span></label>
+                </li>
+                <li>
+                  <input id="license-GPL" name="license" type="checkbox" value="GPL" /><label for="license-GPL"><span>GNU General Public License (GPL)</span></label>
+                </li>
+                <li>
+                  <input id="license-LGPL" name="license" type="checkbox" value="LGPL" /><label for="license-LGPL"><span>GNU Library or "Lesser" General Public License (LGPL)</span></label>
+                </li>
+                <li>
+                  <input id="license-MIT" name="license" type="checkbox" value="MIT" /><label for="license-MIT"><span>MIT License</span></label>
+                </li>
+                <li>
+                  <input id="license-MPL2" name="license" type="checkbox" value="MPL2" /><label for="license-MPL2"><span>Mozilla Public License 2.0</span></label>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="search-filter usa-unstyled-list">
+            <li>
+              <h5>Usage Type</h5>
+              <ul class="usa-unstyled-list">
+                <li>
+                  <input id="usage-type-government-wide-reuse" name="usage-type" type="checkbox" value="government-wide-reuse" /><label for="usage-type-government-wide-reuse"><span>Government-Wide Reuse</span></label>
+                </li>
+                <li>
+                  <input id="usage-type-open-source" name="usage-type" type="checkbox" value="open-source" /><label for="usage-type-open-source"><span>Open Source</span></label>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </fieldset>
+      </form>
+    </div>
+    <div class="search-results-section">
       <repo-list [queryValue]="queryValue"></repo-list>
     </div>
   </div>

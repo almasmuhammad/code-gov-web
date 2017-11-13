@@ -32,7 +32,6 @@ export class RepoListComponent {
 
   ngOnInit() {
     this.subscription = this.searchService.searchResultsReturned$.subscribe(results => {
-      console.log(results);
       if (results !== null) {
         this.results = results;
         this.total = this.searchService.total;
