@@ -40,60 +40,20 @@
   <div class="usa-grid">
     <div class="search-filter-section">
       <h4>Filter</h4>
-      <form class="search-filters">
+      <form class="search-filters" [formGroup]="filterForm">
         <fieldset class="usa-fieldset-inputs">
-          <ul class="search-filter usa-unstyled-list">
+          <ul class="search-filter usa-unstyled-list" *ngIf="getLanguages().length > 0">
             <li>
               <h5>Language</h5>
-              <ul class="usa-unstyled-list">
-                <li>
-                  <input id="language-java" name="language" type="checkbox" value="java" /><label for="language-java"><span>Java</span></label>
-                </li>
-                <li>
-                  <input id="language-javascript" name="language" type="checkbox" value="javascript" /><label for="language-javascript"><span>JavaScript</span></label>
-                </li>
-                <li>
-                  <input id="language-php" name="language" type="checkbox" value="php" /><label for="language-php"><span>PHP</span></label>
-                </li>
-                <li>
-                  <input id="language-python" name="language" type="checkbox" value="python" /><label for="language-python"><span>Python</span></label>
-                </li>
-                <li>
-                  <a class="show-more" href="#">Show more</a>
-                </li>
-              </ul>
+              <show-more [formGroup]="filterForm" name="languages" [list]="getLanguages()"></show-more>
             </li>
           </ul>
-          <ul class="search-filter usa-unstyled-list">
+          <ul class="search-filter usa-unstyled-list" *ngIf="getLicenses().length > 0">
             <li>
               <h5>License</h5>
               <ul class="usa-unstyled-list">
-                <li>
-                  <input id="license-AL2" name="license" type="checkbox" value="AL2" /><label for="license-AL2"><span>Apache License 2.0</span></label>
-                </li>
-                <li>
-                  <input id="license-BSD3" name="license" type="checkbox" value="BSD3" /><label for="license-BSD3"><span>BSD 3-Clause "New" or "Revised" License</span></label>
-                </li>
-                <li>
-                  <input id="license-BSD2" name="license" type="checkbox" value="BSD2" /><label for="license-BSD2"><span>BSD 2-Clause "Simplified" or "FreeBSD" License</span></label>
-                </li>
-                <li>
-                  <input id="license-CDDL" name="license" type="checkbox" value="CDDL" /><label for="license-CDDL"><span>Common Development and Distribution License</span></label>
-                </li>
-                <li>
-                  <input id="license-EPL" name="license" type="checkbox" value="EPL" /><label for="license-EPL"><span>Eclipse Public License</span></label>
-                </li>
-                <li>
-                  <input id="license-GPL" name="license" type="checkbox" value="GPL" /><label for="license-GPL"><span>GNU General Public License (GPL)</span></label>
-                </li>
-                <li>
-                  <input id="license-LGPL" name="license" type="checkbox" value="LGPL" /><label for="license-LGPL"><span>GNU Library or "Lesser" General Public License (LGPL)</span></label>
-                </li>
-                <li>
-                  <input id="license-MIT" name="license" type="checkbox" value="MIT" /><label for="license-MIT"><span>MIT License</span></label>
-                </li>
-                <li>
-                  <input id="license-MPL2" name="license" type="checkbox" value="MPL2" /><label for="license-MPL2"><span>Mozilla Public License 2.0</span></label>
+                <li *ngFor="let license of getLicenses()">
+                  <input id="license-{{ license }}" name="license" type="checkbox" value="{{ license }}" /><label for="license-{{ license }}"><span>{{ license }}</span></label>
                 </li>
               </ul>
             </li>

@@ -1,9 +1,13 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
+const compact = require('lodash/compact');
+const flatten = require('lodash/flatten');
+const uniq = require('lodash/uniq');
 
 import { SearchService } from '../../services/search';
 import { StateService } from '../../services/state';
@@ -27,6 +31,7 @@ export class SearchResultsComponent {
   private searchResultsSubscription: Subscription;
   private total: number;
   private isLoading = true;
+  private filterForm: FormGroup;
 
   /**
    * Constructs a SearchResultsComponent.
@@ -40,7 +45,17 @@ export class SearchResultsComponent {
     public stateService: StateService,
     private activatedRoute: ActivatedRoute,
     private searchService: SearchService,
+    private formBuilder: FormBuilder,
   ) {
+    this.filterForm = formBuilder.group({
+      languages: {},
+      licenses: {},
+    });
+
+    this.filterForm.valueChanges.subscribe(data => {
+      console.log('Form changes', data)
+      // this.output = data
+    });
   }
 
   ngOnInit() {
@@ -57,6 +72,14 @@ export class SearchResultsComponent {
       if (results !== null) {
         this.results = results;
         this.total = this.searchService.total;
+        this.filterForm.setControl('languages', this.formBuilder.group(this.getLanguages().reduce((obj, language) => {
+          obj[language] = this.formBuilder.control(false);
+          return obj;
+        }, {})));
+        this.filterForm.setControl('licenses', this.formBuilder.group(this.getLicenses().reduce((obj, language) => {
+          obj[language] = this.formBuilder.control(false);
+          return obj;
+        }, {})));
         this.isLoading = false;
       }
     });
@@ -68,5 +91,13 @@ export class SearchResultsComponent {
   ngOnDestroy() {
     this.routeSubscription.unsubscribe();
     this.searchResultsSubscription.unsubscribe();
+  }
+
+  getLanguages() {
+    return uniq(compact(flatten(this.results.map(result => result.languages))));
+  }
+
+  getLicenses() {
+    return uniq(compact(flatten(this.results.map(result => result.permissions.licenses ? result.permissions.licenses.map(license => license.name) : []))));
   }
 }

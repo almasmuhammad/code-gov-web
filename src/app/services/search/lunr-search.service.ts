@@ -20,19 +20,12 @@ export class LunrSearchService implements SearchService {
   searchResultsReturned$: Observable<Array<any>>;
   total = 0;
 
-  private searchObservable = new Observable();
   private results = [];
-  private loadedResults = [];
-  private currentIndex = 0;
-  private pageSize = 20;
   private searchResultsReturnedSource = new BehaviorSubject<Array<any>>(null);
-  private previousQuery = '';
   private agenciesSource: Subject<any> = new Subject();
   private releasesSource: Subject<any> = new Subject();
   private agenciesSubscription: Subscription;
   private releasesSubscription: Subscription;
-  private agenciesResults = [];
-  private releasesResults = [];
 
   constructor(
     private agenciesIndexService: AgenciesIndexService,
@@ -59,14 +52,10 @@ export class LunrSearchService implements SearchService {
           .map(result => result.item);
       },
     ).subscribe((searchResults) => {
-      this.currentIndex = 0;
       this.results = searchResults;
 
       this.total = this.results.length;
-      this.loadedResults = this.results
-        .slice(this.currentIndex, this.currentIndex + this.pageSize);
-      this.currentIndex = this.currentIndex + this.pageSize;
-      this.searchResultsReturnedSource.next(this.loadedResults);
+      this.searchResultsReturnedSource.next(this.results);
     });
   }
 
@@ -78,15 +67,5 @@ export class LunrSearchService implements SearchService {
   search(query: string) {
     this.releasesIndexService.search(query, this.releasesSource);
     this.agenciesIndexService.search(query, this.agenciesSource);
-  }
-
-  nextPage() {
-    if (this.currentIndex <= this.total) {
-      this.loadedResults = this.loadedResults.concat(
-        this.results
-          .slice(this.currentIndex, this.currentIndex + this.pageSize));
-      this.currentIndex = this.currentIndex + this.pageSize;
-      this.searchResultsReturnedSource.next(this.loadedResults);
-    }
   }
 }

@@ -55,14 +55,4 @@ export class RepoListComponent {
   hasRepos() {
     return this.results.length > 0;
   }
-
-  /**
-   * When the infinite scroll gets to its loading point, load the next
-   * page of results.
-   *
-   * @return {void}
-   */
-  onScroll() {
-    this.searchService.nextPage();
-  }
 }
