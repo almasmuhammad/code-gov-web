@@ -19,17 +19,17 @@
     <h3 class="repos-count">
       We found {{ total }} {{ "Repositories" | pluralize : reposTotal }} for "{{ queryValue }}"
     </h3>
-    <form class="search-meta-section">
+    <form class="search-meta-section" [formGroup]="metaForm">
       <p>
         <label for="sort">Sort</label>
-        <select id="sort">
+        <select id="sort" name="sort" formControlName="sort">
           <option value="relevance">Relevance</option>
           <option value="date">Date</option>
         </select>
       </p>
       <p>
         <label for="pageSize">Items Per Page</label>
-        <select id="pageSize">
+        <select id="pageSize" name="pageSize" formControlName="pageSize">
           <option value="10">10</option>
           <option value="20">20</option>
           <option value="30">30</option>
@@ -75,7 +75,7 @@
       </form>
     </div>
     <div class="search-results-section">
-      <repo-list [queryValue]="queryValue"></repo-list>
+      <repo-list [queryValue]="queryValue" [results]="filteredResults" [pageSize]="pageSize"></repo-list>
     </div>
   </div>
 </div>

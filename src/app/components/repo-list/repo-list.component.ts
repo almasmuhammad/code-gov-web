@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { SearchService } from '../../services/search';
@@ -14,9 +14,10 @@ import { SearchService } from '../../services/search';
 })
 
 export class RepoListComponent {
-  private results = [];
+  @Input() private results = [];
+  @Input() private pageSize = 10;
+  private currentPage = 1;
   private subscription: Subscription;
-  private total: number;
   private isLoading = true;
 
   /**
@@ -33,8 +34,6 @@ export class RepoListComponent {
   ngOnInit() {
     this.subscription = this.searchService.searchResultsReturned$.subscribe(results => {
       if (results !== null) {
-        this.results = results;
-        this.total = this.searchService.total;
         this.isLoading = false;
       }
     });
@@ -54,5 +53,19 @@ export class RepoListComponent {
    */
   hasRepos() {
     return this.results.length > 0;
+  }
+
+  /**
+   * Returns the index (1-based) of the first item on the page.
+   */
+  getMinPageIndex() {
+    return (this.currentPage - 1) * this.pageSize + 1;
+  }
+
+  /**
+   * Returns the index (1-based) of the last item on the page.
+   */
+  getMaxPageIndex() {
+    return Math.min((this.currentPage - 1) * this.pageSize + this.pageSize, this.results.length);
   }
 }

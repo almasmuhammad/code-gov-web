@@ -6,7 +6,8 @@
 
 <div *ngIf="!isLoading" class="repo-list">
   <div *ngIf="hasRepos()" class="repos-container">
-    <p class="repo-list-summary">Results <strong>1-10</strong> of <strong>{{ total }}</strong></p>
+    <p *ngIf="results.length === 0" class="repo-list-summary">No results found.</p>
+    <p *ngIf="results.length > 0" class="repo-list-summary">Results <strong>{{ getMinPageIndex() }}-{{ getMaxPageIndex() }}</strong> of <strong>{{ results.length }}</strong></p>
     <pagination-template #p="paginationApi" (pageChange)="currentPage = $event">
 
       <ul class="ngx-pagination usa-unstyled-list">
@@ -33,7 +34,7 @@
     </pagination-template>
     <!-- <pagination-controls (pageChange)="currentPage = $event"></pagination-controls> -->
     <ul class="repos-list usa-unstyled-list">
-      <li *ngFor="let result of results | paginate: { itemsPerPage: 10, currentPage: currentPage }" class="repo">
+      <li *ngFor="let result of results | paginate: { itemsPerPage: pageSize, currentPage: currentPage }" class="repo">
         <div *ngIf="result.agency;then repoListItem else agencyListItem"></div>
         <ng-template #repoListItem>
           <repo-list-item [repo]="result"></repo-list-item>

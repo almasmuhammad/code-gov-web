@@ -28,10 +28,14 @@ export class SearchResultsComponent {
   private queryValue: string = '';
   private routeSubscription: Subscription;
   private results = [];
+  private filteredResults = [];
   private searchResultsSubscription: Subscription;
   private total: number;
   private isLoading = true;
   private filterForm: FormGroup;
+  private metaForm: FormGroup;
+  private pageSize = 10;
+  private sort = 'relevance';
 
   /**
    * Constructs a SearchResultsComponent.
@@ -53,8 +57,19 @@ export class SearchResultsComponent {
     });
 
     this.filterForm.valueChanges.subscribe(data => {
-      console.log('Form changes', data)
-      // this.output = data
+      this.filteredResults = this.sortResults(this.filterResults(this.results));
+    });
+
+    this.metaForm = formBuilder.group({
+      pageSize: this.pageSize,
+      sort: this.sort,
+    });
+
+    this.metaForm.valueChanges.subscribe(data => {
+      this.pageSize = data.pageSize;
+      this.sort = data.sort;
+
+      this.filteredResults = this.sortResults(this.filterResults(this.results));
     });
   }
 
@@ -91,6 +106,45 @@ export class SearchResultsComponent {
   ngOnDestroy() {
     this.routeSubscription.unsubscribe();
     this.searchResultsSubscription.unsubscribe();
+  }
+
+  sortResults(results) {
+    if (this.metaForm.value.sort === 'date') {
+      return results.sort((a, b) => {
+        return a.date.lastModified > b.date.lastModified ? -1 : a.date.lastModified === b.date.lastModified ? 0 : 1;
+      });
+    } else if (this.metaForm.value.sort === 'relevance') {
+      return results.sort((a, b) => {
+        return a.score > b.score ? -1 : a.score === b.score ? 0 : 1;
+      });
+    }
+  }
+
+  filterResults(results) {
+    const filteredLanguages = Object.keys(this.filterForm.value.languages).filter(language => this.filterForm.value.languages[language]);
+    const filteredLicenses = Object.keys(this.filterForm.value.licenses).filter(license => this.filterForm.value.licenses[license]);
+
+    return results.filter(result => {
+      if (filteredLanguages.length > 0) {
+        if (Array.isArray(result.languages)) {
+          return filteredLanguages.every(l => result.languages.includes(l));
+        } else {
+          return false;
+        }
+      } else {
+        return true;
+      }
+    }).filter(result => {
+      if (result.permissions.licenses && filteredLicenses.length > 0) {
+        if (Array.isArray(result.permissions.licenses)) {
+          return filteredLicenses.every(l => result.permissions.licenses.map(license => license.name).includes(l));
+        } else {
+          return false;
+        }
+      } else {
+        return true;
+      }
+    });
   }
 
   getLanguages() {
